@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rainbow Six Siege: The Guide</title>
+<script>document.documentElement.classList.add("js")</script>
+<style>
+:root{
+  --bg:#f1f3f5;--surface:#fff;--ink:#111b24;--muted:#44525e;--line:#c9d1d7;
+  --atk:#a50f0f;--atk-bg:#f6d0cc;--def:#1b6b36;--def-bg:#d6eddc;--hz:#f2b800;
+  --head:"Bahnschrift","Arial Narrow","Roboto Condensed","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c141b;--surface:#16212b;--ink:#eef3f6;--muted:#a3b3bf;--line:#2c3b47;
+  --atk:#ff5a4f;--atk-bg:#4a1513;--def:#6fd08c;--def-bg:#163626}}
+:root[data-theme="dark"]{--bg:#0c141b;--surface:#16212b;--ink:#eef3f6;--muted:#a3b3bf;--line:#2c3b47;--atk:#ff5a4f;--atk-bg:#4a1513;--def:#6fd08c;--def-bg:#163626}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:var(--head);font-stretch:condensed;font-weight:600;line-height:1.05;margin:0;letter-spacing:.01em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--hz);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.skip{position:absolute;left:-999px;top:8px;background:var(--hz);color:#111;padding:10px 16px;z-index:20;font-weight:700}
+.skip:focus{left:8px}
+
+/* hero */
+.hero{background:linear-gradient(112deg,#4a0d12 0 50%,#073d22 50% 100%);color:#fff;--muted:#c9d6df;--line:#4a6173;--atk:#ff6a5f;--def:#6fd08c}
+nav{display:flex;gap:6px 22px;flex-wrap:wrap;padding:18px 0;font-weight:700;font-size:15px}
+nav a{text-decoration:none;color:#e4ecf1;padding:2px 0}
+nav a:hover{box-shadow:inset 0 -3px var(--hz)}
+.hero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:28px 22px 56px}
+.hero h1{font-size:clamp(60px,11vw,128px);text-transform:uppercase;font-style:italic;animation:rise .8s ease-out both}
+.hero h1 span{display:block;font-size:.5em;letter-spacing:.14em;color:var(--hz);font-style:normal}
+.hero p.in{max-width:44ch;color:var(--muted);font-size:19px;margin:18px 0 0;animation:rise .8s .15s ease-out both}
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0;padding:0;list-style:none}
+.stats li{background:rgba(0,0,0,.4);border-left:5px solid var(--hz);padding:8px 16px;animation:rise .8s .3s ease-out both}
+.stats b{display:block;font:600 30px/1 var(--head);color:#fff}
+.stats small{color:var(--muted);font-size:13px}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+.plan{width:100%;height:auto;color:#e8eef2}
+.plan .wall{stroke:currentColor;stroke-width:5;fill:none;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.8s ease-out .2s forwards}
+.plan .thin{stroke:var(--line);stroke-width:2;fill:none}
+.plan .breach{stroke:var(--hz);stroke-width:5;stroke-dasharray:7 7;fill:none;animation:march 1.2s linear infinite,glow 1.6s ease-in-out infinite alternate}
+.plan text{font:600 13px system-ui,Arial,sans-serif;fill:var(--muted)}
+.atk-dot{animation:adv 3.6s ease-in-out infinite alternate}
+.def-dot{transform-box:fill-box;transform-origin:center;animation:pulse 1.8s ease-in-out infinite}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes march{to{stroke-dashoffset:-28}}@keyframes glow{from{opacity:.45}to{opacity:1}}
+@keyframes adv{to{transform:translateY(-52px)}}@keyframes pulse{50%{transform:scale(1.35)}}
+.haz{height:14px;background:repeating-linear-gradient(-45deg,var(--hz) 0 14px,#151515 14px 28px)}
+
+section{padding:56px 0}
+section+section{border-top:1px solid var(--line)}
+h2{font-size:clamp(40px,6vw,66px);text-transform:uppercase;font-style:italic}
+h2::after{content:"";display:block;width:110px;height:8px;margin-top:10px;background:linear-gradient(90deg,var(--atk) 33%,var(--hz) 33% 66%,var(--def) 66%)}
+.lede{color:var(--muted);max-width:62ch;margin:14px 0 28px}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:0}
+.facts div{padding:16px 18px;border-top:5px solid var(--hz)}
+.facts div:nth-child(odd){background:var(--atk-bg);border-color:var(--atk)}
+.facts div:nth-child(even){background:var(--def-bg);border-color:var(--def)}
+.facts dt{color:var(--muted);font-size:14px}
+.facts dd{margin:2px 0 0;font:600 24px/1.1 var(--head)}
+.facts div:nth-child(odd) dd{color:var(--atk)}.facts div:nth-child(even) dd{color:var(--def)}
+
+.round,.modes,.maps{display:grid;gap:16px;padding:0;margin:0;list-style:none}
+.round{grid-template-columns:repeat(3,1fr);counter-reset:s}
+.modes{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.maps{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card,.round li{--acc:var(--atk);background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--acc);padding:18px 20px;transition:transform .2s,box-shadow .2s}
+.round li:nth-child(2),.modes .card:nth-child(even),.maps .card:nth-child(even){--acc:var(--def)}
+.round li:nth-child(3){--acc:var(--hz)}
+.card:hover,.round li:hover{transform:translateY(-4px);box-shadow:6px 6px 0 var(--acc)}
+.round li{counter-increment:s}.round li::before{content:"Phase " counter(s);display:block;color:var(--muted);font-size:14px;font-weight:600}
+.card h3,.round h3{font-size:28px;margin:4px 0 6px}
+.card p,.round p{margin:0;color:var(--muted);font-size:16px}
+
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.side{padding:24px;background:var(--surface);border:1px solid var(--line)}
+.side.atk{border-top:8px solid var(--atk);background:linear-gradient(var(--atk-bg),var(--surface) 70%)}
+.side.def{border-top:8px solid var(--def);background:linear-gradient(var(--def-bg),var(--surface) 70%)}
+.side h3{font-size:42px;margin-bottom:6px}.side.atk h3{color:var(--atk)}.side.def h3{color:var(--def)}
+.side p{margin:0 0 10px}.side ul{margin:0;padding-left:20px;color:var(--muted)}
+
+/* operators */
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 18px}
+.tools button{font:700 16px system-ui,sans-serif;padding:9px 18px;border:2px solid var(--ink);background:var(--surface);color:var(--ink);cursor:pointer}
+.tools button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tools button.a[aria-pressed="true"]{background:var(--atk);border-color:var(--atk);color:#fff}
+.tools button.d[aria-pressed="true"]{background:var(--def);border-color:var(--def);color:#111}
+.tools input{font:16px system-ui,sans-serif;padding:9px 12px;border:2px solid var(--line);background:var(--surface);color:var(--ink);min-width:200px;flex:1;max-width:320px}
+.count{color:var(--muted);font-size:15px;margin-left:auto}
+.ops{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;list-style:none;margin:0;padding:0}
+.op{--acc:var(--atk);--tint:var(--atk-bg);display:flex;gap:12px;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--acc);padding:12px;position:relative;transition:transform .2s,box-shadow .2s}
+.op.d{--acc:var(--def);--tint:var(--def-bg)}
+.op:hover{transform:translateY(-3px);box-shadow:5px 5px 0 var(--acc)}
+.op[hidden]{display:none}
+.bd{width:56px;height:63px;flex:none}
+.bd path{fill:var(--tint);stroke:var(--acc);stroke-width:4}
+.bd text{font:600 24px var(--head);fill:var(--acc)}
+.op h3{font-size:24px}.op .g{margin:2px 0 6px;font-size:14px;color:var(--muted);line-height:1.3}
+.m{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:12px;color:var(--muted)}
+.pp{display:inline-flex;gap:3px;align-items:center}
+.pp i{width:9px;height:9px;border-radius:50%;border:2px solid var(--acc)}
+.pp i.on{background:var(--acc)}
+.tag{position:absolute;top:8px;right:8px;font-size:11px;font-weight:700;padding:1px 7px;background:var(--hz);color:#111}
+.note{color:var(--muted);font-size:14px;margin-top:18px;max-width:80ch}
+
+.mapbtn{width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.go{display:inline-block;margin-top:10px;font-weight:700;color:var(--acc)}
+dialog{border:0;padding:0;max-width:min(700px,94vw);width:100%;max-height:92vh;overflow:auto;background:var(--surface);color:var(--ink);box-shadow:0 0 0 4px var(--hz),12px 12px 0 rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(5,10,15,.78)}
+.dh{padding:24px 24px 16px;background:linear-gradient(112deg,#4a0d12 0 50%,#073d22 50% 100%);color:#fff}
+.dh h3{font-size:42px}.dh p{margin:6px 0 0;color:#d3dee6}
+.db{padding:20px 24px 24px}
+.db h4{font:600 22px var(--head);margin:0 0 12px}
+.sites{list-style:none;margin:0 0 22px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sites li{display:flex;align-items:center;gap:12px;padding:16px;border:3px solid var(--ink);background:var(--bg);font-weight:700;font-size:20px;line-height:1.2}
+.sites svg{width:36px;height:36px;flex:none;color:var(--atk)}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;margin:0}
+.links a{font-weight:700}
+.xbtn{position:absolute;top:12px;right:12px;font:700 15px system-ui,sans-serif;padding:8px 14px;background:var(--hz);color:#111;border:0;cursor:pointer}
+@media (max-width:520px){.sites{grid-template-columns:1fr}.dh h3{font-size:34px}}
+.lights,.snow{display:none}
+.xtoggle{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;display:inline-flex;align-items:center;gap:6px;font:600 13px system-ui,sans-serif;padding:6px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--surface);color:var(--ink);cursor:pointer}
+.xtoggle[aria-pressed="true"]{background:#c8102e;border-color:#fff;color:#fff}
+.xmas .lights{display:block;height:20px;background:radial-gradient(circle at 12px 10px,#ff3b3b 0 5px,transparent 6px) 0 0/48px 20px,radial-gradient(circle at 12px 10px,#ffd23f 0 5px,transparent 6px) 16px 0/48px 20px,radial-gradient(circle at 12px 10px,#3bd16f 0 5px,transparent 6px) 32px 0/48px 20px;animation:tw 1.4s ease-in-out infinite alternate}
+@keyframes tw{from{opacity:.55}to{opacity:1}}
+.xmas .hero{background:linear-gradient(112deg,#5a0b14 0 50%,#08432a 50% 100%)}
+.xmas .haz{background:repeating-linear-gradient(-45deg,#c8102e 0 14px,#fff 14px 28px)}
+.xmas h2::after{background:linear-gradient(90deg,#c8102e 33%,#fff 33% 66%,#1a7f3c 66%);outline:1px solid var(--line)}
+.xmas .hero h1 span{color:#fff}
+.xmas footer p:first-child::after{content:" Happy holidays, operators."}
+.xmas .snow{display:block;position:fixed;inset:0;pointer-events:none;z-index:10;overflow:hidden}
+.snow i{position:absolute;top:-10px;border-radius:50%;background:#fff;opacity:.85;animation:fall linear infinite}
+@keyframes fall{to{transform:translate3d(var(--dx,20px),105vh,0)}}
+.opbtn{position:absolute;inset:0;width:100%;height:100%;background:transparent;border:0;cursor:pointer;z-index:1}
+.opbtn:focus-visible{outline:3px solid var(--hz);outline-offset:-3px}
+.tag{pointer-events:none;z-index:2}
+.wk{margin-left:auto;font-weight:700;color:var(--acc);font-size:12px}
+.dh.a{background:linear-gradient(112deg,#4a0d12 0 65%,#7a1420 100%)}
+.dh.d{background:linear-gradient(112deg,#073d22 0 65%,#0d5c36 100%)}
+.gear{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.gear li{border:3px solid var(--ink);background:var(--bg);padding:14px}
+.gear small{display:block;color:var(--muted);font-weight:600;font-size:13px;margin-bottom:2px}
+.gear b{display:block;font-size:22px;line-height:1.2}
+.tips{columns:2;column-gap:40px;margin:0;padding-left:20px}
+.tips li{margin-bottom:12px;break-inside:avoid}.tips li::marker{color:var(--atk);font-size:1.2em}.tips li:nth-child(even)::marker{color:var(--def)}
+.legal p,.legal li{max-width:68ch;color:var(--muted)}
+.legal h3{font-size:26px;margin:22px 0 6px;color:var(--ink)}
+footer{padding:36px 0 56px;color:var(--muted);font-size:14px}
+.js .reveal:not(.in){opacity:0}.js .reveal.in{animation:rise .6s ease-out backwards;animation-delay:var(--d,0s)}
+@media (max-width:760px){
+.hero-in{grid-template-columns:1fr;gap:24px;padding:16px 22px 40px}
+.round,.sides{grid-template-columns:1fr}
+.tips{columns:1}
+body{font-size:16px;-webkit-text-size-adjust:100%}
+section{padding:40px 0}
+nav{gap:0 4px;padding:8px 0 0}
+nav a{padding:12px 10px;min-height:44px;display:inline-flex;align-items:center}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stats b{font-size:26px}
+.facts{grid-template-columns:1fr 1fr}
+.facts dd{font-size:20px}
+.tools button{flex:1;min-height:46px}
+.tools input{max-width:none;width:100%;flex:1 1 100%;min-height:46px}
+.count{margin-left:0;width:100%}
+.ops{grid-template-columns:1fr}
+.card h3,.round h3{font-size:26px}
+.side{padding:18px}.side h3{font-size:36px}
+dialog{max-height:90vh}
+.dh{padding:20px 96px 14px 18px}.db{padding:16px 18px 22px}
+.xbtn{min-height:44px;min-width:44px}
+footer{padding-bottom:96px}
+footer a{display:inline-block;padding:10px 4px}
+.xtoggle{min-height:40px;padding:8px 12px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.plan .wall{stroke-dasharray:none;stroke-dashoffset:0}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#basics">Skip to content</a>
+<div class="hero">
+  <div class="lights" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav aria-label="Guide sections"><a href="#basics">Basics</a><a href="#round">Round flow</a><a href="#sides">Attack and defense</a><a href="#modes">Modes</a><a href="#operators">Operators</a><a href="#maps">Maps</a><a href="#tips">Tips</a></nav>
+  </div>
+  <header class="wrap hero-in">
+    <div>
+      <h1><span>Tom Clancy’s</span>Rainbow Six Siege</h1>
+      <p class="in">A 5v5 tactical shooter where one team breaks in, the other holds the building, and nearly every wall, floor and window can be destroyed.</p>
+      <ul class="stats">
+        <li><b>78</b><small>operators</small></li>
+        <li><b>39 / 39</b><small>attack / defense</small></li>
+        <li><b>2015</b><small>first released</small></li>
+        <li><b>Y11S3</b><small>Split Fire season</small></li>
+      </ul>
+    </div>
+    <svg class="plan" viewBox="0 0 400 300" role="img" aria-labelledby="pt pd"><title id="pt">Diagram of a Siege round</title><desc id="pd">A simple floor plan. A defender stands in an upper room. An attacker below approaches a dashed breach point in an interior wall, with the objective room at lower right.</desc>
+      <rect class="wall" pathLength="1" x="30" y="30" width="340" height="240"/>
+      <path class="wall" pathLength="1" d="M30 150 H150 M190 150 H370"/>
+      <path class="wall" pathLength="1" d="M210 30 V100 M210 130 V150"/>
+      <path class="thin" d="M70 30 V150 M30 90 H70"/><path class="breach" d="M150 150 H190"/>
+      <path class="thin" d="M250 210 h60 v40 h-60z"/><circle cx="285" cy="230" r="8" fill="none" stroke="var(--def)" stroke-width="3"/>
+      <circle class="def-dot" cx="120" cy="75" r="8" fill="var(--def)"/><circle class="atk-dot" cx="165" cy="215" r="8" fill="var(--atk)"/>
+      <path d="M165 207 V160" stroke="var(--atk)" stroke-width="3" stroke-dasharray="4 5" fill="none"/>
+      <text x="40" y="22">Defenders hold</text><text x="40" y="290">Attackers breach</text><text x="196" y="170">Breach point</text><text x="252" y="204">Objective</text>
+    </svg>
+  </header>
+</div>
+<div class="haz" aria-hidden="true"></div>
+
+<main class="wrap">
+  <section id="basics">
+    <h2>The basics</h2>
+    <p class="lede">Siege rewards planning over reflexes. You get one life per round, so information and teamwork decide most fights.</p>
+    <dl class="facts">
+      <div><dt>Developer</dt><dd>Ubisoft Montréal</dd></div>
+      <div><dt>First released</dt><dd>December 1, 2015</dd></div>
+      <div><dt>Team size</dt><dd>5v5</dd></div>
+      <div><dt>Platforms</dt><dd>PC, PlayStation, Xbox</dd></div>
+      <div><dt>Perspective</dt><dd>First person</dd></div>
+      <div><dt>Registered players</dt><dd>100 million+</dd></div>
+    </dl>
+  </section>
+
+  <section id="round">
+    <h2>How a round works</h2>
+    <p class="lede">Each round is short and has a clear order of events.</p>
+    <ol class="round">
+      <li><h3>Prep</h3><p>Attackers send drones to scout the building and find the objective. Defenders reinforce walls, set up barricades and place gadgets.</p></li>
+      <li><h3>Action</h3><p>Attackers breach in and try to complete the objective before the timer ends. Defenders hold them off.</p></li>
+      <li><h3>Result</h3><p>A round ends when the objective is won, a team is eliminated, or time runs out. Teams swap sides during the match.</p></li>
+    </ol>
+  </section>
+
+  <section id="sides">
+    <h2>Attack and defense</h2>
+    <p class="lede">The two sides play differently, which is what makes each map worth learning.</p>
+    <div class="sides">
+      <div class="side atk"><h3>Attackers</h3><p>Choose a spawn, scout with drones, then push in together.</p><ul><li>Breach walls, hatches and barricades</li><li>Use drones to find enemies before entering</li><li>Disable defender gadgets and trade kills</li></ul></div>
+      <div class="side def"><h3>Defenders</h3><p>Pick a room to protect and build it up during prep.</p><ul><li>Reinforce walls so attackers can’t shoot through</li><li>Place cameras, traps and barricades</li><li>Rotate to cover the objective when under pressure</li></ul></div>
+    </div>
+  </section>
+
+  <section id="modes">
+    <h2>Game modes</h2>
+    <p class="lede">Hostage and Secure Area are in Quick Match, while Ranked and Unranked play Bomb only. Short-lived arcade playlists rotate in each season, so check the in-game menu for what’s on now. Dual Front, the 6v6 mode added with Siege X in June 2025, was removed in June 2026.</p>
+    <div class="modes">
+      <div class="card"><h3>Bomb</h3><p>Attackers find and defuse a bomb. Defenders stop them. The only mode in Ranked and Unranked.</p></div>
+      <div class="card"><h3>Secure Area</h3><p>Attackers capture a point. Defenders keep control of it until time runs out.</p></div>
+      <div class="card"><h3>Hostage</h3><p>Attackers rescue a hostage and bring them out. Defenders keep the hostage inside.</p></div>
+      <div class="card"><h3>Arcade playlists</h3><p>Limited-time modes, such as 1v1 and 3v3 duels, appear for a few weeks at a time.</p></div>
+    </div>
+  </section>
+
+  <section id="operators">
+    <h2>All 78 operators</h2>
+    <p class="lede">Roster as of Year 11 Season 3, Operation Split Fire. Noor is the newest operator, and Solid Snake joined earlier this year. Each operator is rated 1 to 3 for speed and health, and the two always add up to 4: fast operators are fragile, slow ones are tough.</p>
+    <div class="tools">
+      <button type="button" class="f" data-s="all" aria-pressed="true">All</button>
+      <button type="button" class="f a" data-s="a" aria-pressed="false">Attackers</button>
+      <button type="button" class="f d" data-s="d" aria-pressed="false">Defenders</button>
+      <input id="q" type="search" placeholder="Search by name or gadget" aria-label="Search operators by name or gadget" autocomplete="off">
+      <span class="count" id="cnt" aria-live="polite"></span>
+    </div>
+    <ul class="ops" id="ops"></ul>
+    <noscript><p>The operator list needs JavaScript to display.</p></noscript>
+    <p class="note">The badges are original monogram artwork, not official art. Starter operators are the ones Ubisoft recommends for new players. Compiled from third-party roster trackers updated in October 2026 that cite Ubisoft’s operator pages. Rosters change each season, so confirm on Ubisoft’s official operator page. Sledge, Thatcher, Ash and the rest of the launch roster are marked L.</p>
+  </section>
+
+  <section id="maps">
+    <h2>Maps</h2>
+    <p class="lede">Select a map to see its bomb sites. These are the 15 maps in the Ranked pool after the October 15, 2026 rotation, and the pool can change.</p>
+    <div class="maps" id="maplist"></div>
+    <noscript><p>The map list needs JavaScript to display.</p></noscript>
+  </section>
+
+  <section id="tips">
+    <h2>Tips for new players</h2>
+    <ul class="tips" style="margin-top:24px">
+      <li>Learn a few maps well before trying to learn every operator.</li>
+      <li>Use your drone on attack. Information beats guessing.</li>
+      <li>Play together and call out enemy positions. Communication wins rounds.</li>
+      <li>Aim at head height and check angles slowly. Rushing gets you killed.</li>
+      <li>Start with a starter operator, such as Sledge on attack or Mute on defense, then branch out.</li>
+      <li>Try Unranked or Quick Match to learn the game without rank pressure.</li>
+    </ul>
+  </section>
+
+  <section id="privacy" class="legal">
+    <h2>Privacy policy</h2>
+    <p>Last updated: November 13, 2026.</p>
+    <h3>What we collect</h3>
+    <p>This site does not collect personal data. It has no accounts, forms, comments, analytics or advertising, and it does not ask you for anything.</p>
+    <h3>Third parties</h3>
+    <p>The page loads no fonts, scripts, images, videos or embeds from other companies. Like any website, the host that serves it may keep standard technical logs, such as IP address and browser type, for security and operation. We do not receive or use those logs. The map pop-ups link to other websites, which open in a new tab. Those sites have their own privacy policies, and this site sends them nothing beyond what your browser sends when you click.</p>
+    <h3>Your rights and contact</h3>
+    <p>Because we hold no personal data about you, there is nothing to access or delete. Questions about this policy: [add your contact email here].</p>
+  </section>
+
+  <section id="cookies" class="legal">
+    <h2>Cookies policy</h2>
+    <p>This site sets no cookies and uses no tracking technologies such as local storage, pixels or fingerprinting. Because of that, there is no cookie banner. If we add analytics, embeds or forms later, we will update this page and ask for your consent first where required.</p>
+  </section>
+
+  <section id="terms" class="legal">
+    <h2>Terms and conditions</h2>
+    <ul>
+      <li>This is an unofficial fan guide for information only. It is not affiliated with, endorsed by or sponsored by Ubisoft.</li>
+      <li>Rainbow Six, Siege, operator names and related marks belong to Ubisoft Entertainment and their respective owners. We use them only to describe the game.</li>
+      <li>The diagram and operator badges on this page are original artwork. The site uses no screenshots, game art or other third-party images.</li>
+      <li>Game details change with each season. We try to be accurate but give no guarantee. Check Ubisoft’s official site for current information.</li>
+      <li>The site is provided as is, without warranties, and we are not liable for loss arising from its use.</li>
+      <li>We may change these terms and the policies above at any time. The date on the privacy policy shows the last update.</li>
+    </ul>
+  </section>
+</main>
+<div class="haz" aria-hidden="true"></div>
+<footer class="wrap">
+  <p>Unofficial fan guide. Rainbow Six Siege is a game by Ubisoft.</p>
+  <p><a href="#privacy">Privacy policy</a> &nbsp; <a href="#cookies">Cookies policy</a> &nbsp; <a href="#terms">Terms and conditions</a></p>
+</footer>
+
+<div class="snow" id="snow" aria-hidden="true"></div>
+<button type="button" class="xtoggle" id="xm" aria-pressed="false"><span aria-hidden="true">🎄</span> Christmas theme</button>
+
+<dialog id="opdlg" aria-labelledby="ot">
+  <button type="button" class="xbtn" id="ox">Close</button>
+  <div class="dh a" id="oh"><h3 id="ot"></h3><p id="os"></p></div>
+  <div class="db">
+    <h4>Suggested loadout</h4>
+    <ul class="gear" id="gear"></ul>
+    <p class="note" style="margin-top:0">One suggested pick, not the full list: Ubisoft lets most operators choose from several weapons and gadgets. Options and weapon stats change each season. Compiled from a third-party loadout guide updated November 12, 2026 that cites Ubisoft’s operator pages, so confirm in-game.</p>
+  </div>
+</dialog>
+
+<dialog id="mapdlg" aria-labelledby="mt">
+  <button type="button" class="xbtn" id="mx">Close</button>
+  <div class="dh"><h3 id="mt"></h3><p id="ms"></p></div>
+  <div class="db">
+    <h4>Bomb sites</h4>
+    <ul class="sites" id="sites"></ul>
+    <h4>Overall map</h4>
+    <p class="links"><a id="lu" href="https://www.ubisoft.com/en-us/game/rainbow-six/siege/game-info/maps" target="_blank" rel="noopener noreferrer">Ubisoft’s official maps page (opens in a new tab)</a><a id="lf" href="#" target="_blank" rel="noopener noreferrer">Floor plans and callouts on a fan site (opens in a new tab)</a></p>
+  </div>
+</dialog>
+
+<script>
+(function(){
+var A="Sledge;Breaching Hammer;2;L|Thatcher;E.G.S. Disruptor;1;L|Ash;Breaching Round;3;L|Thermite;Exothermic Charge;2;L|Twitch;Shock Drone;2;L|Montagne;Le Roc Shield;1;L|Glaz;Flip Sight;3;L|Fuze;Cluster Charge;1;L|Blitz;G52-Tactical Shield;2;L|IQ;Electronics Detector;3;L|Buck;Skeleton Key;2;Y1S1|Blackbeard;H.U.L.L. Adaptable Shield;1;Y1S2|Capitão;Tactical Crossbow;3;Y1S3|Hibana;X-Kairos;3;Y1S4|Jackal;Eyenox Model III;2;Y2S1|Ying;Candela;2;Y2S3|Zofia;KS79 Lifeline;1;Y2S4|Dokkaebi;Jegeo Payload;3;Y2S4|Lion;EE-ONE-D;2;Y3S1|Finka;Adrenal Surge;2;Y3S1|Maverick;Breaching Torch;3;Y3S3|Nomad;Airjab Launcher;2;Y3S4|Gridlock;Trax Stingers;1;Y4S1|Nøkk;HEL Presence Reduction;2;Y4S2|Amaru;Garra Hook;2;Y4S3|Kali;LV Explosive Lance;2;Y4S4|Iana;Gemini Replicator;2;Y5S1|Ace;S.E.L.M.A. Aqua Breacher;1;Y5S2|Zero;Argus Launcher;3;Y5S3|Flores;RCE-Ratero Charge;2;Y6S1|Osa;Talon-8 Clear Shield;1;Y6S3|Sens;R.O.U. Projector System;3;Y7S2|Grim;Kawan Hive Launcher;3;Y7S3|Brava;Kludge Drone;3;Y8S1|Ram;BU-GI Auto Breacher;1;Y8S3|Deimos;Deathmark Tracker;2;Y9S1|Striker;Any secondary gadget;2;Y9S2|Rauora;D.O.M. Panel Launcher;2;Y10S1|Solid Snake;Soliton Radar Mk III;3;Y11S1";
+var D="Smoke;Remote Gas Grenade;2;L|Mute;Signal Disruptor;2;L|Castle;Armor Panel;2;L|Pulse;Cardiac Sensor;3;L|Doc;Stim Pistol;1;L|Rook;Armor Pack;1;L|Kapkan;Entry Denial Device;2;L|Tachanka;Shumikha Launcher;1;L|Jäger;Active Defense;3;L|Bandit;Shock Wire;3;L|Frost;Welcome Mat;2;Y1S1|Valkyrie;Black Eye;2;Y1S2|Caveira;Silent Step;3;Y1S3|Echo;Yokai;2;Y1S4|Mira;Black Mirror;1;Y2S1|Lesion;GU;2;Y2S3|Ela;Grzmot Mine;2;Y2S3|Vigil;ERC-7;3;Y2S4|Alibi;Prisma;3;Y3S2|Maestro;Evil Eye;1;Y3S2|Clash;CCE Shield MK2;1;Y3S3|Kaid;Rtila Electroclaw;1;Y3S4|Mozzie;Pest Launcher;2;Y4S1|Warden;Glance Smart Glasses;1;Y4S2|Goyo;Volcán Canister;2;Y4S3|Wamai;Mag-NET System;2;Y4S4|Oryx;Remah Dash;2;Y5S1|Melusi;Banshee Sonic Defense;1;Y5S2|Aruni;Surya Gate;1;Y5S4|Thunderbird;Kóna Station;2;Y6S2|Thorn;Razorbloom Shell;2;Y6S4|Azami;Kiba Barrier;2;Y7S1|Solis;Spec-IO Electro-Sensor;2;Y7S4|Fenrir;F-NATT Dread Mine;2;Y8S2|Tubarão;Zoto Canister;2;Y8S4|Sentry;Any secondary gadget;2;Y9S2|Skopós;V10 Pantheon Shells;3;Y9S3|Denari;T.R.I.P. Connector;3;Y10S3|Noor;Horus Lance Launcher;2;Y11S3";
+var starters=["Sledge","Thermite","Glaz","Striker","Smoke","Mute","Bandit","Kapkan","Sentry"];
+function pips(n){var h="";for(var i=1;i<=3;i++)h+="<i"+(i<=n?' class="on"':"")+"></i>";return h}
+function mono(n){var w=n.split(" ");return w.length>1?w[0][0]+w[1][0]:Array.from(n).slice(0,2).join("")}
+function build(str,side){return str.split("|").map(function(r){var p=r.split(";"),n=p[0],s=+p[2],h=4-s,tag=starters.indexOf(n)>-1?"Starter":(p[3].indexOf("Y11")===0?"New":"");
+return '<li class="op '+side+'" data-s="'+side+'" data-q="'+(n+" "+p[1]).toLowerCase()+'" data-n="'+n+'" data-g="'+p[1]+'" data-sp="'+s+'" data-ad="'+p[3]+'"><svg class="bd" viewBox="0 0 64 72" aria-hidden="true"><path d="M32 2 60 18v36L32 70 4 54V18z"/><text x="32" y="44" text-anchor="middle">'+mono(n)+'</text></svg><div><h3>'+n+'</h3><p class="g">'+p[1]+'</p><p class="m"><span class="pp" role="img" aria-label="Speed '+s+' of 3, health '+h+' of 3">Spd '+pips(s)+' HP '+pips(h)+'</span><span>'+(p[3]==="L"?"Launch":p[3])+'</span><span class="wk">Weapons ›</span></p></div><button type="button" class="opbtn" aria-label="Show weapons for '+n+'"></button>'+(tag?'<span class="tag">'+tag+'</span>':"")+'</li>'}).join("")}
+var ul=document.getElementById("ops");ul.innerHTML=build(A,"a")+build(D,"d");
+var W="Ace;AK-12;P9;Claymore|Amaru;G8A1;SMG-11;Stun Grenade|Ash;R4-C;5.7 USG;Breach Charge|Blackbeard;Mk17 CQB;;Claymore|Blitz;G52-Tactical Shield;P12;Smoke Grenade|Brava;PARA-308;Super Shorty;Smoke Grenade|Buck;C8-SFW;Mk1 9mm;Stun Grenade|Capitão;PARA-308;PRB92;Hard Breach Charge|Deimos;AK-74M;.44 Vendetta;Frag Grenade|Dokkaebi;XK23;C75 Auto;Breach Charge|Finka;Spear .308;GSh-18;Frag Grenade|Flores;AR33;GSh-18;Stun Grenade|Fuze;AK-12;GSh-18;Hard Breach Charge|Glaz;OTs-03;Bearing 9;Smoke Grenade|Gridlock;F90;Super Shorty;Impact EMP Grenade|Grim;552 Commando;Bailiff 410;Hard Breach Charge|Hibana;Type-89;Bearing 9;Stun Grenade|Iana;ARX200;Gonne-6;Smoke Grenade|IQ;552 Commando;P12;Claymore|Jackal;C7E;ITA12S;Claymore|Kali;CSRX 300;SPSMG9;Breach Charge|Lion;V308;LFP586;Stun Grenade|Maverick;M4;C75 Auto;Stun Grenade|Montagne;Le Roc Shield;P9;Smoke Grenade|Nøkk;FMG-9;5.7 USG;Hard Breach Charge|Nomad;ARX200;PRB92;Stun Grenade|Osa;556xi;PMM;Claymore|Ram;R4-C;Mk1 9mm;Stun Grenade|Rauora;417;Reaper MK2;Breach Charge|Sens;417;SDP 9mm;Hard Breach Charge|Sledge;L85A2;P226 Mk 25;Impact EMP Grenade|Solid Snake;F2;TACIT .45;Frag Grenade|Striker;M4;5.7 USG;Hard Breach Charge|Thatcher;L85A2;P226 Mk 25;Breach Charge|Thermite;556xi;5.7 USG;Smoke Grenade|Twitch;F2;P9;Claymore|Ying;T-95 LSW;Q-929;Hard Breach Charge|Zero;SC3000K;5.7 USG;Claymore|Zofia;M762;RG15;Claymore|Alibi;Mx4 Storm;Bailiff 410;Proximity Alarm|Aruni;P10 RONI;PRB92;Barbed Wire|Azami;9x19VSN;D-50;Barbed Wire|Bandit;MP7;P12;Nitro Cell|Castle;UMP45;Super Shorty;Bulletproof Camera|Caveira;M12;Luison;Proximity Alarm|Clash;CCE Shield MK2;SPSMG9;Barbed Wire|Denari;Scorpion EVO 3 A1;Glaive-12;Deployable Shield|Doc;MP5;P9;Bulletproof Camera|Echo;MP5SD;Bearing 9;Deployable Shield|Ela;Scorpion EVO 3 A1;RG15;Barbed Wire|Fenrir;MP7;5.7 USG;Bulletproof Camera|Frost;9mm C1;ITA12S;Deployable Shield|Goyo;Vector .45 ACP;P229;Proximity Alarm|Jäger;416-C Carbine;P-10C;Bulletproof Camera|Kaid;TCSG12;.44 Mag Semi-Auto;Nitro Cell|Kapkan;9x19VSN;PMM;Barbed Wire|Lesion;T-5 SMG;Q-929;Bulletproof Camera|Maestro;ALDA 5.56;Bailiff 410;Barbed Wire|Melusi;MP5;ITA12S;Bulletproof Camera|Mira;Vector .45 ACP;ITA12S;Nitro Cell|Mozzie;Commando 9;Super Shorty;Nitro Cell|Mute;MP5K;SMG-11;Nitro Cell|Noor;Commando 9;Bailiff 410;Deployable Shield|Oryx;T-5 SMG;Bailiff 410;Barbed Wire|Pulse;UMP45;5.7 USG;Nitro Cell|Rook;MP5;Reaper MK2;Proximity Alarm|Sentry;Commando 9;C75 Auto;Nitro Cell|Skopós;PCX-33;P229;Proximity Alarm|Smoke;FMG-9;SMG-11;Deployable Shield|Solis;P90;SMG-11;Proximity Alarm|Tachanka;9x19VSN;Bearing 9;Barbed Wire|Thorn;UZK50Gi;C75 Auto;Barbed Wire|Thunderbird;Spear .308;Bearing 9;Barbed Wire|Tubarão;MPX;P226 Mk 25;Nitro Cell|Valkyrie;MPX;Glaive-12;Impact Grenade|Vigil;K1A;C75 Auto;Bulletproof Camera|Wamai;MP5K;Super Shorty;Deployable Shield|Warden;MPX;P-10C;Nitro Cell",LD={};W.split("|").forEach(function(r){var q=r.split(";");LD[q[0]]={a:q[1],b:q[2],c:q[3]}});
+var od=document.getElementById("opdlg");
+ul.addEventListener("click",function(e){var b=e.target.closest(".opbtn");if(!b)return;var li=b.parentNode,n=li.dataset.n,w=LD[n]||{},a=li.dataset.s==="a",sp=+li.dataset.sp;
+document.getElementById("ot").textContent=n;
+document.getElementById("oh").className="dh "+(a?"a":"d");
+document.getElementById("os").textContent=(a?"Attacker":"Defender")+" · Unique gadget: "+li.dataset.g+" · Speed "+sp+", health "+(4-sp);
+function t(l,v){return "<li><small>"+l+"</small><b>"+(v||"None listed")+"</b></li>"}
+document.getElementById("gear").innerHTML=t("Primary weapon",w.a)+t("Secondary weapon",w.b)+t("Secondary gadget",w.c);
+if(od.showModal){od.showModal()}else{od.setAttribute("open","")}});
+document.getElementById("ox").addEventListener("click",function(){od.close()});
+od.addEventListener("click",function(e){if(e.target===od)od.close()});
+var side="all",q=document.getElementById("q"),cnt=document.getElementById("cnt"),btns=document.querySelectorAll(".f");
+function apply(){var t=q.value.trim().toLowerCase(),n=0;ul.querySelectorAll(".op").forEach(function(li){var ok=(side==="all"||li.dataset.s===side)&&(!t||li.dataset.q.indexOf(t)>-1);li.hidden=!ok;if(ok)n++});cnt.textContent="Showing "+n+" of 78"}
+btns.forEach(function(b){b.addEventListener("click",function(){side=b.dataset.s;btns.forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});apply()})});
+q.addEventListener("input",apply);apply();
+var M="Bank;Major bank, Los Angeles, California;CEO Office,Open Area,Tellers’ Office,CCTV Room;bank|Border;Border checkpoint, Middle East;Armory Lockers,Workshop,Customs Inspection,Tellers;border|Calypso Casino;Casino in the heart of Las Vegas, Nevada;Cigar Room,Blackjack,Bar,CCTV;calypso-casino|Chalet;Après-ski chalet, Courchevel, French Alps;Master Bedroom,Bar,Dining Room,Wine Cellar;chalet|Clubhouse;Biker gang clubhouse, Hanover, Germany;Gym,CCTV Room,Bar,Church;clubhouse|Coastline;Seaside bar and club complex, Ibiza, Spain;Theater,Hookah Lounge,Blue Bar,Kitchen;coastline|Consulate;French consulate, Abidjan, Ivory Coast;Meeting Room,Piano Room,Tellers,Cafeteria;consulate|Fortress;Mudbrick kasbah, Morocco;Commander’s Office,Dormitory,Waiting Room,Hammam;fortress|Kafe Dostoyevsky;High-class café, central Moscow, Russia;Cocktail Lounge,Fireplace Hall,Reading Room,Kitchen Service;kafe|Kanal;Industrial canal-side buildings, Hamburg, Germany;Server Room,Security Room,Coast Guard Meeting Room,Supply Room;kanal|Lair;Keres Legion base in a cave complex, Portugal;Master Office,Bunks,Armory,Lab;lair|Nighthaven Labs;Nighthaven headquarters, offshore near Singapore;Command Center,Kitchen,Control Room,Tank;nighthaven|Oregon;Fortified survivalist compound, Redmond, Oregon;Kids’ Dorms,Kitchen,Meeting Hall,Laundry Room;oregon|Outback;Roadside service station and motel, Australia’s Red Heart;Piano Room,Party Room,Green Bedroom,Mechanic Shop;outback|Villa;Crime-family villa, Tuscany, Italy;Aviator Room,Trophy Room,Dining Room,Art Storage;villa";
+var maps=M.split("|").map(function(r){var p=r.split(";");return{n:p[0],s:p[1],z:p[2].split(","),k:p[3]}});
+var ml=document.getElementById("maplist"),dlg=document.getElementById("mapdlg");
+var bomb='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="14" r="7" fill="currentColor"/><path d="M16 8l3-3M19 2v3M17 5h3" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
+ml.innerHTML=maps.map(function(m,i){return '<button type="button" class="card mapbtn" data-i="'+i+'"><h3>'+m.n+'</h3><p>'+m.s+'</p><span class="go">View bomb sites</span></button>'}).join("");
+ml.addEventListener("click",function(e){var b=e.target.closest(".mapbtn");if(!b)return;var m=maps[+b.dataset.i];
+document.getElementById("mt").textContent=m.n;document.getElementById("ms").textContent=m.s;
+document.getElementById("sites").innerHTML=m.z.map(function(z){return "<li>"+bomb+"<span>"+z+"</span></li>"}).join("");
+document.getElementById("lf").href="https://siegestrats.com/maps/"+m.k+"/callouts";
+if(dlg.showModal){dlg.showModal()}else{dlg.setAttribute("open","")}});
+document.getElementById("mx").addEventListener("click",function(){dlg.close()});
+dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
+var xm=document.getElementById("xm"),sn=document.getElementById("snow"),de=document.documentElement;
+var still=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+xm.addEventListener("click",function(){var on=xm.getAttribute("aria-pressed")!=="true";xm.setAttribute("aria-pressed",on?"true":"false");de.classList.toggle("xmas",on);sn.innerHTML="";
+if(on&&!still){var h="";for(var i=0;i<36;i++){var z=2+Math.random()*4;h+='<i style="left:'+(Math.random()*100).toFixed(1)+'%;width:'+z.toFixed(1)+'px;height:'+z.toFixed(1)+'px;animation-duration:'+(7+Math.random()*9).toFixed(1)+'s;animation-delay:-'+(Math.random()*12).toFixed(1)+'s;--dx:'+((Math.random()*80)-40).toFixed(0)+'px"></i>'}sn.innerHTML=h}});
+var root=document.documentElement,calm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(calm||!("IntersectionObserver" in window)){root.classList.remove("js");return}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll(".round li,.card,.side,.facts div").forEach(function(el,i){el.classList.add("reveal");el.style.setProperty("--d",((i%4)*.08)+"s");io.observe(el)});
+})();
+</script>
+</body>
+</html>
